@@ -30,7 +30,7 @@ func showInvoice(bill int, moneyPaid int) {
   
   change := moneyPaid - bill
   if change != 0 {
-    createLeftAlignText("Change " + strconv.Itoa(change))
+    createLeftAlignText("Remain: " + strconv.Itoa(change))
   }
   
   fmt.Println("\n"+utils.CreateLine(50, "="))

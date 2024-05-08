@@ -1,46 +1,20 @@
-package order
+package orderHistory
 
 import (
-	"main/model/food"
 	"encoding/json"
+	"main/model/order"
     "io/ioutil"
     "log"
     "os"
 )
 
 type OrderHistory struct {
-	Orders []Order `json:"orders"`
-  }
-
-type Order struct {
-	Food     *food.Food
-	Quantity int
+	Orders [] order.Order `json:"orders"`
 }
-
-var orders []Order
-
-func GetOrders() []Order {
-	return orders
-}
-
-func Add(o Order) {
-	orders = append(orders, o)
-}
-
-func RemoveOrder(indexToRemove int) {
-	orders = append(orders[:indexToRemove], orders[indexToRemove+1:]...)
-}
-
-func ClearOrder() {
-	orders = []Order{}
-}
-
-////
-
   
 var orderHistory OrderHistory
   
-func AddOrder(order Order) {
+func AddOrder(order order.Order) {
 	orderHistory.Orders = append(orderHistory.Orders, order)
 	saveOrderHistory()
 }

@@ -4,9 +4,13 @@ import (
 	"fmt"
 	"main/model/food"
 	"main/model/order"
+  "main/model/orderHistory"
 	"main/utils"
 	"strconv"
 	"strings"
+  "log"
+  "os"
+  "encoding/json"
 )
 
 var currentOrder order.Order
@@ -40,7 +44,7 @@ func SetupOrder(f *food.Food) {
     " x" +
     strconv.Itoa(qty) +
     utils.CreateLine(4, " ") +
-    utils.ToCurrency(qty*f.Price*1000) +
+    utils.ToCurrency(qty*f.Price) +
     "\n")
 
   fmt.Printf("Are you sure [y/n] ? ")
@@ -131,7 +135,7 @@ func ShowOrderTable(title string) string {
   totalPaid = 0
 
   for number, order := range orders{
-    orderPrice := order.Quantity * order.Food.Price * 1000
+    orderPrice := order.Quantity * order.Food.Price
     totalPaid += orderPrice
 
     numberStr = append(numberStr, strconv.Itoa(number+1))
@@ -147,5 +151,30 @@ func ShowOrderTable(title string) string {
 func onOrderConfirmed(){
 	order.Add(currentOrder)
   food.UpdateStock(currentOrder.Food, currentOrder.Quantity)
+  addToOrderHistory(currentOrder)
   ShowOrderMenu()
+}
+
+
+func addToOrderHistory(order order.Order) {
+  file, err := os.ReadFile("DB/orderHistory.json")
+  if err != nil {
+      log.Fatal(err)
+  }
+
+  var orderHistory orderHistory.OrderHistory
+  if err := json.Unmarshal(file, &orderHistory); err != nil {
+      log.Fatal(err)
+  }
+
+  orderHistory.Orders = append(orderHistory.Orders, order)
+
+  updatedJSON, err := json.Marshal(orderHistory)
+  if err != nil {
+      log.Fatal(err)
+  }
+
+  if err := os.WriteFile("DB/orderHistory.json", updatedJSON, 0644); err != nil {
+      log.Fatal(err)
+  }
 }
