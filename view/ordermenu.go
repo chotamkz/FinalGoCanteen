@@ -21,18 +21,18 @@ func SetupOrder(f *food.Food) {
   currentOrder = order.Order{}
 	utils.ClearScreen()
 	ShowFoodTable()
-  fmt.Println("Cancel order [109]\n")
+  fmt.Println("Cancel order [200]\n")
 
 	var qty int  
 	fmt.Printf("How many " + strings.Title(f.Name) + " do you want? ")
 	fmt.Scanln(&qty)
 
   if qty > f.Stock{
-    utils.SendMessage("Not enough stock !", ShowFoodMenu)
+    utils.SendMessage("Not enough stock", ShowFoodMenu)
     return
   }
 
-  if qty == 109 {
+  if qty == 200 {
     ShowFoodMenu()
     return
   }
@@ -46,7 +46,7 @@ func SetupOrder(f *food.Food) {
     strconv.Itoa(qty) +
     utils.CreateLine(4, " ") +
     utils.ToCurrency(qty*f.Price) +
-    "\n")
+    " тенге.\n")
 
   fmt.Printf("Are you sure [y/n] ? ")
   utils.ReceiveUserInput(handleOrderInput)
@@ -185,7 +185,6 @@ func addToOrderHistory(order order.Order) {
   }
     defer csvFile.Close()
 
-    // Create a CSV writer
     writer := csv.NewWriter(csvFile)
     defer writer.Flush()
 
@@ -194,7 +193,7 @@ func addToOrderHistory(order order.Order) {
         log.Fatal(err)
     }
     if fileInfo.Size() == 0 {
-        if err := writer.Write([]string{"Name", "Price", "Stock"}); err != nil {
+        if err := writer.Write([]string{"Name", "Price", "Number_of_Order"}); err != nil {
             log.Fatal(err)
         }
     }

@@ -1,4 +1,7 @@
-Name,Price,Stock
+Name,Price,Number_of_Order
 Латте,1300,1
 Латте,1300,1
 Американо,990,1
+Экспрессо,1200,1
+caramel macchiato,1500,2
+Ручка,150,20
