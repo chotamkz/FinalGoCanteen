@@ -72,7 +72,7 @@ func addNewFood() {
 	fmt.Printf("Input food name : ")
 	fmt.Scanln(&foodName)
   
-	fmt.Printf("Input food price (35.000 -> 35) : ")
+	fmt.Printf("Input food price: ")
 	fmt.Scanln(&foodPrice)
   
 	fmt.Printf("Input food stock : ")

@@ -14,7 +14,7 @@ func ShowFinanceMenu(){
   finance := []string{utils.ToCurrency(financeDB.TotalIncome),
                      utils.ToCurrency(financeDB.TotalExpenditure)}
 
-  menu := "\n\n[1] Show cash history"
+  menu := ""
   menu += "\n[2] Exit to main menu"
   menu += "\n\nEnter the menu you choose : "
   
@@ -33,7 +33,7 @@ func handleFinanceMenu(input string){
 
   switch intInput {
     case 1:
-      utils.SendMessage("Feature not ready yet", ShowMainmenu)
+      utils.SendMessage("", ShowMainmenu)
     case 2:
       ShowMainmenu()
   }

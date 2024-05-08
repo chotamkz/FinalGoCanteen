@@ -12,8 +12,8 @@ import (
 func ShowFoodMenu() {
 	utils.ClearScreen()
 	ShowFoodTable()
-  fmt.Println("See order details [101]")
-  fmt.Println("Back to main menu [109]\n")
+  fmt.Println("See order details [100]")
+  fmt.Println("Back to Canteen menu [200]\n")
 	fmt.Printf("Enter the menu you want to order : ")
 	utils.ReceiveUserInput(HandleFoodOrderInput)
 }
@@ -48,12 +48,12 @@ func ShowFoodTable(){
             }
             name := strNum + " " + strings.Title(food.Name)
             
-			price := strconv.Itoa(food.Price) + "K"
+			price := strconv.Itoa(food.Price) + " тенге."
 			if len(price) == 1 {
 				price = " " + price
 			}
             
-			stock := "stock : " + strconv.Itoa(food.Stock)
+			stock := "Quantity : " + strconv.Itoa(food.Stock)
 
 			foodNameColumn = append(foodNameColumn, name)
 			foodPriceColumn = append(foodPriceColumn, price)
@@ -74,10 +74,10 @@ func HandleFoodOrderInput(input string) {
     return
   }
   
-  if intInput == 101 {
+  if intInput == 100 {
     ShowOrderMenu()
     return
-  } else if intInput == 109 {
+  } else if intInput == 200 {
     ShowMainmenu()
   }
   

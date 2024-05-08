@@ -19,7 +19,7 @@ func SetupOrder(f *food.Food) {
   fmt.Println("Cancel order [109]\n")
 
 	var qty int  
-	fmt.Printf("How many " + strings.Title(f.Name) + " do you want ? ")
+	fmt.Printf("How many " + strings.Title(f.Name) + " do you want? ")
 	fmt.Scanln(&qty)
 
   if qty > f.Stock{
@@ -50,9 +50,9 @@ func SetupOrder(f *food.Food) {
 func handleOrderInput(input string){
   input = strings.ToLower(input)
   switch input {
-    case "y", "yes":
+    case "y", "yes", "da":
       onOrderConfirmed()
-    case "n", "no":
+    case "n", "no", "net":
       ShowFoodMenu()
     default:
       utils.SendMessage(nil, ShowFoodMenu)
@@ -79,9 +79,9 @@ func ShowOrderMenu(){
                            
   menu := "\n\n[1] Input new order"
   menu += "\n[2] Remove order"
-  menu += "\n[3] Checkout"
+  menu += "\n[3] Proceed to payment"
   fmt.Println(menu)
-  fmt.Printf("\nEnter the menu you choose : ")
+  fmt.Printf("\nEnter the menu you choose: ")
   utils.ReceiveUserInput(handleOrderMenu)
 }
 

@@ -35,7 +35,7 @@ func showInvoice(bill int, moneyPaid int) {
   
   fmt.Println("\n"+utils.CreateLine(50, "="))
 
-  fmt.Println("\nThank you for being a loyal customer of Jogorobo Cafe \n\nHave a nice day :)")
+  fmt.Println("\nThanks Thanks, come back in SDU Canteen Menu \n\nSDU")
   fmt.Printf("\nEnter to return to the main menu")
   fmt.Scanln()
   order.ClearOrder()

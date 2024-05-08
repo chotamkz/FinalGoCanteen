@@ -9,7 +9,7 @@ import (
 
 func ShowMainmenu() {
 	output := ""
-	output += utils.CreateTitle(50, "jogorobo cafe")
+	output += utils.CreateTitle(30, "SDU Canteen Menu")
 	output += "\n\n"
 	output += "[1] Ordering Food\n"
 	output += "[2] Finance\n"
