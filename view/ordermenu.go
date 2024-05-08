@@ -11,6 +11,7 @@ import (
   "log"
   "os"
   "encoding/json"
+  "encoding/csv"
 )
 
 var currentOrder order.Order
@@ -169,12 +170,40 @@ func addToOrderHistory(order order.Order) {
 
   orderHistory.Orders = append(orderHistory.Orders, order)
 
-  updatedJSON, err := json.Marshal(orderHistory)
+  // updatedJSON, err := json.Marshal(orderHistory)
+  // if err != nil {
+  //     log.Fatal(err)
+  // }
+
+  // if err := os.WriteFile("DB/orderHistory.json", updatedJSON, 0644); err != nil {
+  //     log.Fatal(err)
+  // }
+
+  csvFile, err := os.OpenFile("DB/orderHistory.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
   if err != nil {
       log.Fatal(err)
   }
+    defer csvFile.Close()
 
-  if err := os.WriteFile("DB/orderHistory.json", updatedJSON, 0644); err != nil {
-      log.Fatal(err)
-  }
+    // Create a CSV writer
+    writer := csv.NewWriter(csvFile)
+    defer writer.Flush()
+
+    fileInfo, err := csvFile.Stat()
+    if err != nil {
+        log.Fatal(err)
+    }
+    if fileInfo.Size() == 0 {
+        if err := writer.Write([]string{"Name", "Price", "Stock"}); err != nil {
+            log.Fatal(err)
+        }
+    }
+
+    if err := writer.Write([]string{
+        order.Food.Name,
+        strconv.Itoa(order.Food.Price),
+        strconv.Itoa(order.Quantity),
+    }); err != nil {
+        log.Fatal(err)
+    }
 }

@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 )
+/////////
 
 type financeModel struct {
   TotalIncome, TotalExpenditure int

@@ -11,9 +11,9 @@ func ShowMainmenu() {
 	output := ""
 	output += utils.CreateTitle(30, "SDU Canteen Menu")
 	output += "\n\n"
-	output += "[1] Ordering Food\n"
+	output += "[1] Order\n"
 	output += "[2] Finance\n"
-	output += "[3] Configuration (Admin)\n"
+	output += "[3] Managment order\n"
 	output += "[4] Exit\n\n"
 	output += "Enter the menu you choose : "
 
